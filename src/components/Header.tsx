@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAccount, useConnect, useDisconnect, useSwitchChain, useChainId } from 'wagmi';
 import { botchainMainnet } from '@/config/chain';
 import { ODDONE_CONTRACT_ADDRESS } from '@/config/contract';
-import { Wallet, ExternalLink, RefreshCw } from 'lucide-react';
+import { Wallet, ExternalLink, RefreshCw, Copy, Check } from 'lucide-react';
 
 export function Header() {
   const { address, isConnected } = useAccount();
@@ -12,7 +12,7 @@ export function Header() {
   const { disconnect } = useDisconnect();
   const chainId = useChainId();
   const { switchChain, isPending: isSwitching } = useSwitchChain();
-  const [showNetworkInfo, setShowNetworkInfo] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const isWrongNetwork = isConnected && chainId !== botchainMainnet.id;
 
@@ -33,11 +33,82 @@ export function Header() {
     }
   };
 
+  const handleCopyContract = () => {
+    navigator.clipboard.writeText(ODDONE_CONTRACT_ADDRESS);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0f0f13]/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-        {/* Brand Logo & Direct Links */}
-        <div className="flex items-center gap-4">
+    <>
+      {/* PERMANENT TOP ECOSYSTEM BANNER - ALWAYS VISIBLE AT THE VERY TOP OF THE PAGE */}
+      <div className="bg-[#121218] border-b border-purple-500/20 px-3 py-1.5 text-[11px] sm:text-xs text-zinc-300">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2">
+          {/* Logo + Chain Info */}
+          <div className="flex items-center gap-2">
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain"
+              className="h-4 w-4 rounded-sm object-contain border border-white/20"
+            />
+            <span className="font-bold text-white">BOT Chain</span>
+            <span className="rounded bg-emerald-950/80 px-1.5 py-0.2 text-[10px] font-mono text-emerald-400 border border-emerald-800/40">
+              Mainnet (677)
+            </span>
+            <span className="text-zinc-600 hidden sm:inline">•</span>
+            <span className="hidden sm:inline text-zinc-400">
+              Contract:
+            </span>
+            <a
+              href={`https://scan.botchain.ai/address/${ODDONE_CONTRACT_ADDRESS}#code`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-purple-400 hover:text-purple-300 hover:underline inline-flex items-center gap-1"
+              title="View verified Mainnet contract on BOT Chain Explorer"
+            >
+              <span>{shortenAddress(ODDONE_CONTRACT_ADDRESS)}</span>
+              <ExternalLink className="h-2.5 w-2.5" />
+            </a>
+            <button
+              onClick={handleCopyContract}
+              className="text-zinc-500 hover:text-white transition"
+              title="Copy Mainnet contract address"
+            >
+              {copied ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
+            </button>
+          </div>
+
+          {/* Direct Ecosystem Links */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-medium text-zinc-300 hover:text-white transition"
+            >
+              <img src="/botchain-logo.png" alt="BOT Chain" className="h-3 w-3 rounded-xs object-contain" />
+              <span>BOT Chain Website</span>
+              <ExternalLink className="h-2.5 w-2.5 text-zinc-500" />
+            </a>
+            <span className="text-zinc-700">|</span>
+            <a
+              href="https://scan.botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-medium text-zinc-300 hover:text-white transition"
+            >
+              <img src="/botchain-logo.png" alt="BOT Chain" className="h-3 w-3 rounded-xs object-contain" />
+              <span>BOT Chain Explorer</span>
+              <ExternalLink className="h-2.5 w-2.5 text-zinc-500" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* STICKY MAIN HEADER */}
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0f0f13]/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+          {/* Brand Logo */}
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 font-black text-white shadow-lg shadow-purple-900/30">
               <span className="text-xl">O</span>
@@ -53,140 +124,75 @@ export function Header() {
             </div>
           </div>
 
-          {/* Quick ecosystem links in header on medium screens */}
-          <div className="hidden lg:flex items-center gap-2 border-l border-white/10 pl-4">
-            <a
-              href="https://botchain.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition"
+          {/* Network & Wallet Controls */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* BOT Chain Network Indicator with Logo */}
+            <div
+              className="flex items-center gap-2 rounded-lg border border-white/10 bg-zinc-900/90 px-2.5 py-1.5 text-xs text-zinc-300"
+              title="BOT Chain Mainnet (Chain ID 677)"
             >
-              <img src="/botchain-logo.png" alt="BOT Chain" className="h-3.5 w-3.5 rounded-sm object-contain" />
-              <span>Website</span>
-              <ExternalLink className="h-2.5 w-2.5" />
-            </a>
-            <span className="text-zinc-600">•</span>
-            <a
-              href="https://scan.botchain.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition"
-            >
-              <img src="/botchain-logo.png" alt="BOT Chain" className="h-3.5 w-3.5 rounded-sm object-contain" />
-              <span>Explorer</span>
-              <ExternalLink className="h-2.5 w-2.5" />
-            </a>
-          </div>
-        </div>
-
-        {/* Network & Wallet Controls */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* BOT Chain Network Indicator with Logo */}
-          <button
-            onClick={() => setShowNetworkInfo(!showNetworkInfo)}
-            className="flex items-center gap-2 rounded-lg border border-white/5 bg-zinc-900/80 px-2.5 py-1.5 text-xs text-zinc-300 hover:border-zinc-700 transition"
-            title="BOT Chain Network Info"
-          >
-            <img
-              src="/botchain-logo.png"
-              alt="BOT Chain"
-              className="h-4 w-4 rounded-sm object-contain"
-            />
-            <span className="hidden md:inline font-medium">BOT Chain</span>
-            <span className="text-zinc-400 text-[11px] font-mono">677</span>
-            <span className={`h-2 w-2 rounded-full ${isConnected && isWrongNetwork ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
-          </button>
-
-          {/* Network Switcher Button if connected to wrong chain */}
-          {isWrongNetwork && (
-            <button
-              onClick={handleSwitchNetwork}
-              disabled={isSwitching}
-              className="flex items-center gap-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/20 transition disabled:opacity-50"
-            >
-              <RefreshCw className={`h-3.5 w-3.5 ${isSwitching ? 'animate-spin' : ''}`} />
-              <span>Switch to BOT Chain</span>
-            </button>
-          )}
-
-          {/* Wallet Action */}
-          {!isConnected ? (
-            <button
-              onClick={handleConnect}
-              disabled={isConnecting}
-              className="flex items-center gap-2 rounded-lg bg-purple-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-md shadow-purple-900/20 hover:bg-purple-500 transition disabled:opacity-50"
-            >
-              <Wallet className="h-3.5 w-3.5" />
-              <span>{isConnecting ? 'Connecting...' : 'Connect Wallet'}</span>
-            </button>
-          ) : (
-            <div className="flex items-center gap-2">
-              <a
-                href={`https://scan.botchain.ai/address/${address}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-zinc-800/80 px-2.5 py-1.5 text-xs font-mono text-zinc-200 hover:border-purple-500/40 transition"
-              >
-                <span>{shortenAddress(address!)}</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
-              </a>
-              <button
-                onClick={() => disconnect()}
-                className="rounded-lg border border-white/5 bg-zinc-900/80 px-2.5 py-1.5 text-xs font-medium text-zinc-400 hover:text-rose-300 hover:border-rose-900/50 transition"
-                title="Disconnect Wallet"
-              >
-                Disconnect
-              </button>
+              <img
+                src="/botchain-logo.png"
+                alt="BOT Chain"
+                className="h-4 w-4 rounded-sm object-contain"
+              />
+              <span className="hidden sm:inline font-medium">BOT Chain</span>
+              <span className="text-zinc-400 text-[11px] font-mono">677</span>
+              <span className={`h-2 w-2 rounded-full ${isConnected && isWrongNetwork ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* Network Modal / Dropdown info */}
-      {showNetworkInfo && (
-        <div className="border-t border-white/5 bg-[#14141b] px-4 py-3 text-xs text-zinc-400">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-4 flex-wrap">
+            {/* Network Switcher Button if connected to wrong chain */}
+            {isWrongNetwork && (
+              <button
+                onClick={handleSwitchNetwork}
+                disabled={isSwitching}
+                className="flex items-center gap-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/20 transition disabled:opacity-50"
+              >
+                <RefreshCw className={`h-3.5 w-3.5 ${isSwitching ? 'animate-spin' : ''}`} />
+                <span>Switch to BOT Chain</span>
+              </button>
+            )}
+
+            {/* Wallet Action */}
+            {!isConnected ? (
+              <button
+                onClick={handleConnect}
+                disabled={isConnecting}
+                className="flex items-center gap-2 rounded-lg bg-purple-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-md shadow-purple-900/20 hover:bg-purple-500 transition disabled:opacity-50"
+              >
+                <Wallet className="h-3.5 w-3.5" />
+                <span>{isConnecting ? 'Connecting...' : 'Connect Wallet'}</span>
+              </button>
+            ) : (
               <div className="flex items-center gap-2">
-                <img src="/botchain-logo.png" alt="BOT Chain" className="h-4 w-4 rounded-sm object-contain" />
-                <span className="font-semibold text-zinc-200">BOT Chain (677)</span>
-              </div>
-              <div>
-                <span className="text-zinc-500">Currency:</span>{' '}
-                <span className="font-semibold text-zinc-200">BOT</span>
-              </div>
-              <div>
-                <span className="text-zinc-500">Mainnet Contract:</span>{' '}
                 <a
-                  href={`https://scan.botchain.ai/address/${ODDONE_CONTRACT_ADDRESS}`}
+                  href={`https://scan.botchain.ai/address/${address}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-purple-400 hover:underline inline-flex items-center gap-1"
+                  className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-zinc-800/80 px-2.5 py-1.5 text-xs font-mono text-zinc-200 hover:border-purple-500/40 transition"
                 >
-                  <span>{shortenAddress(ODDONE_CONTRACT_ADDRESS)}</span>
-                  <ExternalLink className="h-3 w-3" />
+                  <span>{shortenAddress(address!)}</span>
+                  <ExternalLink className="h-3 w-3 text-zinc-400" />
                 </a>
+                <button
+                  onClick={() => disconnect()}
+                  className="rounded-lg border border-white/5 bg-zinc-900/80 px-2.5 py-1.5 text-xs font-medium text-zinc-400 hover:text-rose-300 hover:border-rose-900/50 transition"
+                  title="Disconnect Wallet"
+                >
+                  Disconnect
+                </button>
               </div>
-            </div>
-            <a
-              href="https://scan.botchain.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 text-purple-400 hover:underline"
-            >
-              <span>BOT Chain Explorer</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
+            )}
           </div>
         </div>
-      )}
 
-      {/* Connect Error Toast */}
-      {connectError && (
-        <div className="bg-rose-950/60 border-b border-rose-900/50 px-4 py-2 text-xs text-rose-300 text-center">
-          Failed to connect wallet: {connectError.message}
-        </div>
-      )}
-    </header>
+        {/* Connect Error Toast */}
+        {connectError && (
+          <div className="bg-rose-950/60 border-b border-rose-900/50 px-4 py-2 text-xs text-rose-300 text-center">
+            Failed to connect wallet: {connectError.message}
+          </div>
+        )}
+      </header>
+    </>
   );
 }
