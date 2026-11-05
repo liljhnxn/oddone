@@ -36,19 +36,46 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0f0f13]/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-        {/* Brand Logo */}
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 font-black text-white shadow-lg shadow-purple-900/30">
-            <span className="text-xl">O</span>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-lg font-bold tracking-tight text-white">OddOne</span>
-              <span className="rounded bg-purple-950/80 px-1.5 py-0.5 text-[10px] font-medium text-purple-300 border border-purple-800/40">
-                Web3
-              </span>
+        {/* Brand Logo & Direct Links */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 font-black text-white shadow-lg shadow-purple-900/30">
+              <span className="text-xl">O</span>
             </div>
-            <p className="text-xs text-zinc-400 hidden sm:block">Spot the odd one out</p>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-bold tracking-tight text-white">OddOne</span>
+                <span className="rounded bg-purple-950/80 px-1.5 py-0.5 text-[10px] font-medium text-purple-300 border border-purple-800/40">
+                  Web3
+                </span>
+              </div>
+              <p className="text-xs text-zinc-400 hidden sm:block">Spot the odd one out</p>
+            </div>
+          </div>
+
+          {/* Quick ecosystem links in header on medium screens */}
+          <div className="hidden lg:flex items-center gap-2 border-l border-white/10 pl-4">
+            <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition"
+            >
+              <img src="/botchain-logo.png" alt="BOT Chain" className="h-3.5 w-3.5 rounded-sm object-contain" />
+              <span>Website</span>
+              <ExternalLink className="h-2.5 w-2.5" />
+            </a>
+            <span className="text-zinc-600">•</span>
+            <a
+              href="https://scan.botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition"
+            >
+              <img src="/botchain-logo.png" alt="BOT Chain" className="h-3.5 w-3.5 rounded-sm object-contain" />
+              <span>Explorer</span>
+              <ExternalLink className="h-2.5 w-2.5" />
+            </a>
           </div>
         </div>
 
