@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useAccount, useConnect, useDisconnect, useSwitchChain, useChainId } from 'wagmi';
 import { botchainMainnet } from '@/config/chain';
+import { ODDONE_CONTRACT_ADDRESS } from '@/config/contract';
 import { Wallet, ExternalLink, RefreshCw } from 'lucide-react';
 
 export function Header() {
@@ -53,15 +54,20 @@ export function Header() {
 
         {/* Network & Wallet Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* BOT Chain Network Indicator */}
+          {/* BOT Chain Network Indicator with Logo */}
           <button
             onClick={() => setShowNetworkInfo(!showNetworkInfo)}
             className="flex items-center gap-2 rounded-lg border border-white/5 bg-zinc-900/80 px-2.5 py-1.5 text-xs text-zinc-300 hover:border-zinc-700 transition"
             title="BOT Chain Network Info"
           >
-            <span className={`h-2 w-2 rounded-full ${isConnected && isWrongNetwork ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain"
+              className="h-4 w-4 rounded-sm object-contain"
+            />
             <span className="hidden md:inline font-medium">BOT Chain</span>
-            <span className="text-zinc-500 text-[11px] font-mono">677</span>
+            <span className="text-zinc-400 text-[11px] font-mono">677</span>
+            <span className={`h-2 w-2 rounded-full ${isConnected && isWrongNetwork ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
           </button>
 
           {/* Network Switcher Button if connected to wrong chain */}
@@ -113,18 +119,26 @@ export function Header() {
       {showNetworkInfo && (
         <div className="border-t border-white/5 bg-[#14141b] px-4 py-3 text-xs text-zinc-400">
           <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-4">
-              <div>
-                <span className="text-zinc-500">Chain:</span>{' '}
+            <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-2">
+                <img src="/botchain-logo.png" alt="BOT Chain" className="h-4 w-4 rounded-sm object-contain" />
                 <span className="font-semibold text-zinc-200">BOT Chain (677)</span>
               </div>
               <div>
                 <span className="text-zinc-500">Currency:</span>{' '}
-                <span className="font-semibold text-zinc-200">BOT (18 decimals)</span>
+                <span className="font-semibold text-zinc-200">BOT</span>
               </div>
               <div>
-                <span className="text-zinc-500">RPC:</span>{' '}
-                <span className="font-mono text-zinc-300">https://rpc.botchain.ai</span>
+                <span className="text-zinc-500">Mainnet Contract:</span>{' '}
+                <a
+                  href={`https://scan.botchain.ai/address/${ODDONE_CONTRACT_ADDRESS}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-purple-400 hover:underline inline-flex items-center gap-1"
+                >
+                  <span>{shortenAddress(ODDONE_CONTRACT_ADDRESS)}</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
               </div>
             </div>
             <a

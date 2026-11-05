@@ -68,12 +68,13 @@ export function Leaderboard() {
             <div>
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
                 <span>On-Chain Records</span>
-                <span className="text-xs font-medium rounded-full bg-zinc-800 px-2 py-0.5 text-zinc-400 border border-white/5">
-                  Botchain Mainnet
+                <span className="text-xs font-medium rounded-full bg-zinc-800 px-2.5 py-0.5 text-zinc-300 border border-white/5 inline-flex items-center gap-1.5">
+                  <img src="/botchain-logo.png" alt="BOT Chain" className="h-3 w-3 rounded-sm object-contain" />
+                  <span>BOT Chain</span>
                 </span>
               </h2>
               <p className="text-xs text-zinc-400">
-                Recent game submissions retrieved directly from the OddOneScores smart contract.
+                Recent game submissions retrieved directly from the OddOneScores contract on BOT Chain.
               </p>
             </div>
           </div>
@@ -103,14 +104,14 @@ export function Leaderboard() {
               </div>
               <h3 className="text-sm font-semibold text-zinc-200">Contract Not Configured</h3>
               <p className="mx-auto mt-1 max-w-md text-xs text-zinc-400">
-                To view live scores from Botchain Mainnet, set <code className="text-purple-300 font-mono">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code> in your environment file.
+                To view live scores from BOT Chain, set <code className="text-purple-300 font-mono">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code> in your environment file.
               </p>
             </div>
           ) : isLoading ? (
             /* Loading State */
             <div className="py-12 text-center text-xs text-zinc-500 flex flex-col items-center gap-2">
               <RefreshCw className="h-5 w-5 animate-spin text-purple-400" />
-              <span>Fetching verified score records from Botchain Mainnet...</span>
+              <span>Fetching verified score records from BOT Chain...</span>
             </div>
           ) : scores.length === 0 ? (
             /* Empty State 2: No scores submitted yet */
@@ -120,7 +121,7 @@ export function Leaderboard() {
               </div>
               <h3 className="text-sm font-semibold text-zinc-200">No On-Chain Scores Yet</h3>
               <p className="mx-auto mt-1 max-w-md text-xs text-zinc-400">
-                Be the first player to complete a round and record your score on Botchain Mainnet!
+                Be the first player to complete a round and record your score on BOT Chain!
               </p>
             </div>
           ) : (
@@ -196,7 +197,7 @@ export function Leaderboard() {
         <div className="mt-6 pt-4 border-t border-white/5 flex items-start gap-2 text-[11px] text-zinc-500">
           <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5 text-zinc-400" />
           <p>
-            Scores displayed here are self-reported by players upon completing game sessions and recorded directly into the <code className="font-mono text-zinc-400">OddOneScores</code> smart contract. Gameplay is not independently validated on-chain.
+            Scores displayed here are self-reported by players upon completing game sessions and recorded directly into the <code className="font-mono text-zinc-400">OddOneScores</code> smart contract at <a href={`https://scan.botchain.ai/address/${ODDONE_CONTRACT_ADDRESS}`} target="_blank" rel="noopener noreferrer" className="text-purple-400 underline font-mono">{ODDONE_CONTRACT_ADDRESS.slice(0, 8)}...{ODDONE_CONTRACT_ADDRESS.slice(-6)}</a>.
           </p>
         </div>
       </div>

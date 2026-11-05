@@ -139,27 +139,27 @@ export function FinalScore({
 
         {/* Web3 On-Chain Score Recording Section */}
         <div className="mb-6 rounded-xl border border-purple-500/20 bg-purple-950/20 p-5 text-left">
-          <div className="flex items-center gap-2 mb-2">
-            <ShieldCheck className="h-4 w-4 text-purple-400" />
-            <h3 className="text-sm font-bold text-white">Record Score on Botchain Mainnet</h3>
+          <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <img src="/botchain-logo.png" alt="BOT Chain" className="h-4 w-4 rounded-sm object-contain" />
+              <h3 className="text-sm font-bold text-white">Record Score on BOT Chain</h3>
+            </div>
+            <a
+              href={`https://scan.botchain.ai/address/${ODDONE_CONTRACT_ADDRESS}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-mono text-purple-400 hover:underline inline-flex items-center gap-1"
+            >
+              <span>{ODDONE_CONTRACT_ADDRESS.slice(0, 6)}...{ODDONE_CONTRACT_ADDRESS.slice(-4)}</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
           </div>
           <p className="text-xs text-zinc-400 mb-4">
-            Optionally preserve your result on-chain. On-chain score records are public and verifiable on BotchainScan.
+            Optionally preserve your result on-chain. On-chain score records are public and verifiable on BOT Chain Explorer.
           </p>
 
-          {/* Condition 1: Smart Contract Not Configured */}
-          {!isContractConfigured ? (
-            <div className="rounded-lg border border-amber-500/20 bg-amber-950/30 p-3 text-xs text-amber-200 flex items-start gap-2.5">
-              <AlertTriangle className="h-4 w-4 shrink-0 text-amber-400 mt-0.5" />
-              <div>
-                <p className="font-semibold text-amber-300">Contract Not Configured</p>
-                <p className="text-[11px] text-amber-200/80 mt-0.5">
-                  The smart contract address has not been configured in <code className="font-mono bg-black/40 px-1 py-0.5 rounded">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code>.
-                </p>
-              </div>
-            </div>
-          ) : !isConnected ? (
-            /* Condition 2: Wallet Disconnected */
+          {!isConnected ? (
+            /* Wallet Disconnected */
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-lg border border-white/5 bg-[#14141c] p-3 text-xs">
               <div className="flex items-center gap-2 text-zinc-300">
                 <Wallet className="h-4 w-4 text-purple-400 shrink-0" />
@@ -173,10 +173,10 @@ export function FinalScore({
               </button>
             </div>
           ) : isWrongNetwork ? (
-            /* Condition 3: Connected to Wrong Network */
+            /* Connected to Wrong Network */
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-lg border border-amber-500/30 bg-amber-950/30 p-3 text-xs">
               <div className="text-amber-200">
-                Connected to wrong network. Switch to Botchain Mainnet (Chain ID 677) to continue.
+                Connected to wrong network. Switch to BOT Chain (Chain ID 677) to continue.
               </div>
               <button
                 onClick={handleSwitchNetwork}
@@ -188,7 +188,7 @@ export function FinalScore({
               </button>
             </div>
           ) : isConfirmed ? (
-            /* Condition 4: Successfully Confirmed On-Chain */
+            /* Successfully Confirmed On-Chain */
             <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/40 p-4 text-xs text-emerald-200 space-y-2">
               <div className="flex items-center gap-2 font-bold text-emerald-300">
                 <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
@@ -206,14 +206,14 @@ export function FinalScore({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 font-mono text-purple-400 hover:text-purple-300 hover:underline"
                   >
-                    <span>View on BotchainScan Explorer</span>
+                    <span>View on BOT Chain Explorer</span>
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </div>
               )}
             </div>
           ) : (
-            /* Condition 5: Ready to Submit */
+            /* Ready to Submit */
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-lg border border-white/5 bg-[#14141c] p-3 text-xs">
                 <div>
@@ -228,7 +228,7 @@ export function FinalScore({
                   {isSubmitting ? (
                     <>
                       <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                      <span>{isWritePending ? 'Waiting for signature...' : 'Confirming on Botchain...'}</span>
+                      <span>{isWritePending ? 'Waiting for signature...' : 'Confirming on BOT Chain...'}</span>
                     </>
                   ) : (
                     <>
@@ -243,7 +243,7 @@ export function FinalScore({
               {isConfirming && txHash && (
                 <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-950/40 border border-purple-800/40 rounded-lg p-2.5">
                   <Loader2 className="h-3.5 w-3.5 animate-spin shrink-0 text-purple-400" />
-                  <span>Transaction broadcasted. Awaiting block confirmation on BotchainScan...</span>
+                  <span>Transaction broadcasted. Awaiting block confirmation on BOT Chain Explorer...</span>
                 </div>
               )}
 

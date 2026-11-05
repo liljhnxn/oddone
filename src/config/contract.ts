@@ -1,4 +1,7 @@
-export const ODDONE_CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS || '').trim() as `0x${string}`;
+export const ODDONE_CONTRACT_ADDRESS: `0x${string}` = (
+  (process.env.NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS || '').trim() ||
+  '0xDfA9407DD6D940A4613E07c73f2ef838cc64Da15'
+) as `0x${string}`;
 
 export const ODDONE_CONTRACT_ABI = [
   {
@@ -181,4 +184,3 @@ export const ODDONE_CONTRACT_ABI = [
     type: "function"
   }
 ] as const;
-
