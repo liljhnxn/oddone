@@ -53,14 +53,14 @@ export function Header() {
 
         {/* Network & Wallet Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Botchain Network Indicator */}
+          {/* BOT Chain Network Indicator */}
           <button
             onClick={() => setShowNetworkInfo(!showNetworkInfo)}
             className="flex items-center gap-2 rounded-lg border border-white/5 bg-zinc-900/80 px-2.5 py-1.5 text-xs text-zinc-300 hover:border-zinc-700 transition"
-            title="Botchain Network Info"
+            title="BOT Chain Network Info"
           >
             <span className={`h-2 w-2 rounded-full ${isConnected && isWrongNetwork ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
-            <span className="hidden md:inline font-medium">Botchain Mainnet</span>
+            <span className="hidden md:inline font-medium">BOT Chain</span>
             <span className="text-zinc-500 text-[11px] font-mono">677</span>
           </button>
 
@@ -72,7 +72,7 @@ export function Header() {
               className="flex items-center gap-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/20 transition disabled:opacity-50"
             >
               <RefreshCw className={`h-3.5 w-3.5 ${isSwitching ? 'animate-spin' : ''}`} />
-              <span>Switch to Botchain</span>
+              <span>Switch to BOT Chain</span>
             </button>
           )}
 
@@ -116,7 +116,7 @@ export function Header() {
             <div className="flex items-center gap-4">
               <div>
                 <span className="text-zinc-500">Chain:</span>{' '}
-                <span className="font-semibold text-zinc-200">Botchain Mainnet (677)</span>
+                <span className="font-semibold text-zinc-200">BOT Chain (677)</span>
               </div>
               <div>
                 <span className="text-zinc-500">Currency:</span>{' '}
@@ -133,7 +133,7 @@ export function Header() {
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-purple-400 hover:underline"
             >
-              <span>BotchainScan Explorer</span>
+              <span>BOT Chain Explorer</span>
               <ExternalLink className="h-3 w-3" />
             </a>
           </div>

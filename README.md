@@ -66,7 +66,7 @@ OddOne is a lightweight, responsive Web3 mini-game deployed on **Botchain Mainne
 │   │   ├── Leaderboard.tsx    # Live on-chain score feed & empty state
 │   │   └── Footer.tsx         # Branding, explorer links & disclaimer
 │   ├── config/
-│   │   ├── chain.ts           # Botchain Mainnet & Testnet definitions
+│   │   ├── chain.ts           # BOT Chain definition
 │   │   ├── contract.ts        # Contract address & ABI
 │   │   └── wagmi.ts           # Wagmi client configuration
 │   ├── data/

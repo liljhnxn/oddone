@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 /**
  * @title OddOneScores
- * @notice Records completed game scores for the OddOne mini-game on Botchain Testnet.
+ * @notice Records completed game scores for the OddOne mini-game on BOT Chain.
  * @dev Scores are self-reported by players upon game completion. No funds, tokens, or prizes are managed.
  */
 contract OddOneScores {
@@ -102,4 +102,3 @@ contract OddOneScores {
         return records;
     }
 }
-

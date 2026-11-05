@@ -1,47 +1,74 @@
 'use client';
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Globe, Compass } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-white/5 bg-[#0b0b0e] py-8 text-xs text-zinc-500">
-      <div className="mx-auto max-w-5xl px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="mt-16 border-t border-white/5 bg-[#0b0b0e] py-10 text-xs text-zinc-400">
+      <div className="mx-auto max-w-5xl px-4 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Branding & Tagline */}
-        <div className="text-center sm:text-left">
-          <div className="flex items-center justify-center sm:justify-start gap-2 text-zinc-300 font-bold">
-            <span className="flex h-5 w-5 items-center justify-center rounded bg-purple-600 text-[10px] text-white">
+        <div className="text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-2.5 text-zinc-200 font-bold text-base">
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 text-xs font-black text-white shadow-sm shadow-purple-900/40">
               O
             </span>
             <span>OddOne</span>
           </div>
-          <p className="mt-1 text-[11px] text-zinc-500">
+          <p className="mt-1 text-xs text-zinc-400">
             Spot the odd one out. Prove your instincts.
           </p>
         </div>
 
-        {/* Network & Explorer Link */}
-        <div className="flex items-center gap-4 text-center sm:text-right">
-          <div className="flex items-center gap-1.5 text-zinc-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>Botchain Mainnet (Chain ID 677)</span>
+        {/* BOT Chain Ecosystem Links & Logo Section */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+          {/* BOT Chain Identifier Badge */}
+          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-zinc-900/90 px-3.5 py-2">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-purple-600/30 border border-purple-500/40 text-purple-300 font-mono font-bold text-[11px]">
+              BOT
+            </div>
+            <div className="text-left">
+              <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>BOT Chain</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </div>
+              <div className="text-[10px] text-zinc-400">Chain ID: 677</div>
+            </div>
           </div>
-          <a
-            href="https://scan.botchain.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 transition"
-          >
-            <span>BotchainScan</span>
-            <ExternalLink className="h-3 w-3" />
-          </a>
+
+          {/* Official Required Links */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-white/5 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:border-purple-500/40 hover:text-white transition"
+              title="BOT Chain Official Website"
+            >
+              <Globe className="h-3.5 w-3.5 text-purple-400" />
+              <span>BOT Chain Website</span>
+              <ExternalLink className="h-3 w-3 text-zinc-400" />
+            </a>
+
+            <a
+              href="https://scan.botchain.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-white/5 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:border-purple-500/40 hover:text-white transition"
+              title="BOT Chain Block Explorer"
+            >
+              <Compass className="h-3.5 w-3.5 text-purple-400" />
+              <span>BOT Chain Explorer</span>
+              <ExternalLink className="h-3 w-3 text-zinc-400" />
+            </a>
+          </div>
         </div>
       </div>
 
       {/* Required Disclaimer */}
-      <div className="mx-auto max-w-5xl px-4 mt-6 pt-4 border-t border-white/5 text-center text-[11px] text-zinc-500">
+      <div className="mx-auto max-w-5xl px-4 mt-8 pt-4 border-t border-white/5 text-center text-[11px] text-zinc-400">
         <p>
-          Disclaimer: OddOne score records are submitted directly by players on-chain and are self-reported. Scores are not cheat-proof. No monetary rewards, tokens, or prizes are distributed.
+          Disclaimer: OddOne score records are submitted directly by players on-chain to the verified OddOneScores smart contract. Scores are self-reported and verifiable on BOT Chain Explorer. No monetary rewards, tokens, or prizes are distributed.
         </p>
       </div>
     </footer>

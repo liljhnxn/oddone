@@ -4,10 +4,9 @@ const { ethers } = hre;
 async function main() {
   const network = await ethers.provider.getNetwork();
   const chainId = Number(network.chainId);
-  const isMainnet = chainId === 677;
 
   console.log("--------------------------------------------------");
-  console.log(`Deploying OddOneScores to ${isMainnet ? "Botchain Mainnet (Chain ID 677)" : "Network (Chain ID " + chainId + ")"}`);
+  console.log(`Deploying OddOneScores to BOT Chain (Chain ID ${chainId})...`);
 
   const [deployer] = await ethers.getSigners();
   console.log(`Deployer address: ${deployer.address}`);
@@ -35,7 +34,7 @@ async function main() {
   const balanceAfter = await ethers.provider.getBalance(deployer.address);
   const cost = balanceBefore - balanceAfter;
 
-  const explorerBase = isMainnet ? "https://scan.botchain.ai" : "https://scan.bohr.life";
+  const explorerBase = "https://scan.botchain.ai";
 
   console.log("--------------------------------------------------");
   console.log(`OddOneScores successfully deployed!`);
