@@ -6,13 +6,11 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'OddOne — Spot the Odd One Out | Botchain Mainnet',
-  description: 'A simple Web3 mini-game. Four options. One doesn\'t belong. Spot the odd one out and record your instincts on Botchain Mainnet.',
+  title: 'OddOne — Spot the Odd One Out | BOT Chain',
+  description: 'A simple Web3 mini-game. Four options. One doesn\'t belong. Spot the odd one out and record your instincts on BOT Chain.',
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon',
+    icon: '/favicon.svg',
+    apple: '/botchain-logo.png',
   },
 };
 
