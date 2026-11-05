@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ExternalLink, ShieldCheck } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -24,15 +24,15 @@ export function Footer() {
         <div className="flex items-center gap-4 text-center sm:text-right">
           <div className="flex items-center gap-1.5 text-zinc-400">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>Botchain Testnet (Chain ID 968)</span>
+            <span>Botchain Mainnet (Chain ID 677)</span>
           </div>
           <a
-            href="https://scan.bohr.life"
+            href="https://scan.botchain.ai"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 transition"
           >
-            <span>BohrScan</span>
+            <span>BotchainScan</span>
             <ExternalLink className="h-3 w-3" />
           </a>
         </div>
@@ -47,4 +47,3 @@ export function Footer() {
     </footer>
   );
 }
-

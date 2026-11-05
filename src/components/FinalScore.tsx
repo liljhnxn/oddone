@@ -10,7 +10,7 @@ import {
   useConnect,
 } from 'wagmi';
 import { ODDONE_CONTRACT_ADDRESS, ODDONE_CONTRACT_ABI } from '@/config/contract';
-import { botchainTestnet } from '@/config/chain';
+import { botchainMainnet } from '@/config/chain';
 import {
   Trophy,
   RotateCcw,
@@ -21,7 +21,6 @@ import {
   Loader2,
   Wallet,
   ShieldCheck,
-  Info,
 } from 'lucide-react';
 
 interface FinalScoreProps {
@@ -35,14 +34,13 @@ export function FinalScore({
   score,
   totalQuestions,
   onPlayAgain,
-  onScoreSubmittedOnChain,
 }: FinalScoreProps) {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { switchChain, isPending: isSwitching } = useSwitchChain();
   const { connectors, connect } = useConnect();
 
-  const isWrongNetwork = isConnected && chainId !== botchainTestnet.id;
+  const isWrongNetwork = isConnected && chainId !== botchainMainnet.id;
   const isContractConfigured = Boolean(
     ODDONE_CONTRACT_ADDRESS && ODDONE_CONTRACT_ADDRESS.startsWith('0x') && ODDONE_CONTRACT_ADDRESS.length === 42
   );
@@ -90,7 +88,7 @@ export function FinalScore({
 
   const handleSwitchNetwork = () => {
     if (switchChain) {
-      switchChain({ chainId: botchainTestnet.id });
+      switchChain({ chainId: botchainMainnet.id });
     }
   };
 
@@ -143,10 +141,10 @@ export function FinalScore({
         <div className="mb-6 rounded-xl border border-purple-500/20 bg-purple-950/20 p-5 text-left">
           <div className="flex items-center gap-2 mb-2">
             <ShieldCheck className="h-4 w-4 text-purple-400" />
-            <h3 className="text-sm font-bold text-white">Record Score on Botchain Testnet</h3>
+            <h3 className="text-sm font-bold text-white">Record Score on Botchain Mainnet</h3>
           </div>
           <p className="text-xs text-zinc-400 mb-4">
-            Optionally preserve your result on-chain. On-chain score records are public and verifiable on BohrScan.
+            Optionally preserve your result on-chain. On-chain score records are public and verifiable on BotchainScan.
           </p>
 
           {/* Condition 1: Smart Contract Not Configured */}
@@ -156,7 +154,7 @@ export function FinalScore({
               <div>
                 <p className="font-semibold text-amber-300">Contract Not Configured</p>
                 <p className="text-[11px] text-amber-200/80 mt-0.5">
-                  The smart contract address has not been configured in <code className="font-mono bg-black/40 px-1 py-0.5 rounded">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code>. Deploy the contract using the deployment script to record scores on-chain.
+                  The smart contract address has not been configured in <code className="font-mono bg-black/40 px-1 py-0.5 rounded">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code>.
                 </p>
               </div>
             </div>
@@ -178,7 +176,7 @@ export function FinalScore({
             /* Condition 3: Connected to Wrong Network */
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-lg border border-amber-500/30 bg-amber-950/30 p-3 text-xs">
               <div className="text-amber-200">
-                Connected to wrong network. Switch to Botchain Testnet (Chain ID 968) to continue.
+                Connected to wrong network. Switch to Botchain Mainnet (Chain ID 677) to continue.
               </div>
               <button
                 onClick={handleSwitchNetwork}
@@ -203,12 +201,12 @@ export function FinalScore({
               {txHash && (
                 <div className="pt-2 border-t border-emerald-500/20">
                   <a
-                    href={`https://scan.bohr.life/tx/${txHash}`}
+                    href={`https://scan.botchain.ai/tx/${txHash}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 font-mono text-purple-400 hover:text-purple-300 hover:underline"
                   >
-                    <span>View on BohrScan Explorer</span>
+                    <span>View on BotchainScan Explorer</span>
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </div>
@@ -245,7 +243,7 @@ export function FinalScore({
               {isConfirming && txHash && (
                 <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-950/40 border border-purple-800/40 rounded-lg p-2.5">
                   <Loader2 className="h-3.5 w-3.5 animate-spin shrink-0 text-purple-400" />
-                  <span>Transaction broadcasted. Awaiting block confirmation on BohrScan...</span>
+                  <span>Transaction broadcasted. Awaiting block confirmation on BotchainScan...</span>
                 </div>
               )}
 
@@ -276,4 +274,3 @@ export function FinalScore({
     </div>
   );
 }
-

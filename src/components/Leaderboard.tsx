@@ -22,7 +22,6 @@ export function Leaderboard() {
     isLoading,
     refetch,
     isRefetching,
-    error,
   } = useReadContract({
     address: ODDONE_CONTRACT_ADDRESS,
     abi: ODDONE_CONTRACT_ABI,
@@ -70,7 +69,7 @@ export function Leaderboard() {
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
                 <span>On-Chain Records</span>
                 <span className="text-xs font-medium rounded-full bg-zinc-800 px-2 py-0.5 text-zinc-400 border border-white/5">
-                  Botchain Testnet
+                  Botchain Mainnet
                 </span>
               </h2>
               <p className="text-xs text-zinc-400">
@@ -104,14 +103,14 @@ export function Leaderboard() {
               </div>
               <h3 className="text-sm font-semibold text-zinc-200">Contract Not Configured</h3>
               <p className="mx-auto mt-1 max-w-md text-xs text-zinc-400">
-                To view live scores from Botchain Testnet, set <code className="text-purple-300 font-mono">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code> in your environment file.
+                To view live scores from Botchain Mainnet, set <code className="text-purple-300 font-mono">NEXT_PUBLIC_ODDONE_CONTRACT_ADDRESS</code> in your environment file.
               </p>
             </div>
           ) : isLoading ? (
             /* Loading State */
             <div className="py-12 text-center text-xs text-zinc-500 flex flex-col items-center gap-2">
               <RefreshCw className="h-5 w-5 animate-spin text-purple-400" />
-              <span>Fetching verified score records from Botchain Testnet...</span>
+              <span>Fetching verified score records from Botchain Mainnet...</span>
             </div>
           ) : scores.length === 0 ? (
             /* Empty State 2: No scores submitted yet */
@@ -121,7 +120,7 @@ export function Leaderboard() {
               </div>
               <h3 className="text-sm font-semibold text-zinc-200">No On-Chain Scores Yet</h3>
               <p className="mx-auto mt-1 max-w-md text-xs text-zinc-400">
-                Be the first player to complete a round and record your score on Botchain Testnet!
+                Be the first player to complete a round and record your score on Botchain Mainnet!
               </p>
             </div>
           ) : (
@@ -150,7 +149,7 @@ export function Leaderboard() {
                         </td>
                         <td className="py-3">
                           <a
-                            href={`https://scan.bohr.life/address/${record.player}`}
+                            href={`https://scan.botchain.ai/address/${record.player}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 font-mono text-zinc-200 hover:text-purple-400 transition"
@@ -204,4 +203,3 @@ export function Leaderboard() {
     </section>
   );
 }
-

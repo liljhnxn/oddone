@@ -6,8 +6,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'OddOne — Spot the Odd One Out | Botchain Testnet',
-  description: 'A simple Web3 mini-game. Four options. One doesn\'t belong. Spot the odd one out and record your instincts on Botchain Testnet.',
+  title: 'OddOne — Spot the Odd One Out | Botchain Mainnet',
+  description: 'A simple Web3 mini-game. Four options. One doesn\'t belong. Spot the odd one out and record your instincts on Botchain Mainnet.',
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },

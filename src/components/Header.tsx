@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useAccount, useConnect, useDisconnect, useSwitchChain, useChainId } from 'wagmi';
-import { botchainTestnet } from '@/config/chain';
-import { ShieldAlert, Wallet, ExternalLink, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { botchainMainnet } from '@/config/chain';
+import { Wallet, ExternalLink, RefreshCw } from 'lucide-react';
 
 export function Header() {
   const { address, isConnected } = useAccount();
@@ -13,7 +13,7 @@ export function Header() {
   const { switchChain, isPending: isSwitching } = useSwitchChain();
   const [showNetworkInfo, setShowNetworkInfo] = useState(false);
 
-  const isWrongNetwork = isConnected && chainId !== botchainTestnet.id;
+  const isWrongNetwork = isConnected && chainId !== botchainMainnet.id;
 
   const shortenAddress = (addr: string) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
@@ -28,7 +28,7 @@ export function Header() {
 
   const handleSwitchNetwork = () => {
     if (switchChain) {
-      switchChain({ chainId: botchainTestnet.id });
+      switchChain({ chainId: botchainMainnet.id });
     }
   };
 
@@ -57,11 +57,11 @@ export function Header() {
           <button
             onClick={() => setShowNetworkInfo(!showNetworkInfo)}
             className="flex items-center gap-2 rounded-lg border border-white/5 bg-zinc-900/80 px-2.5 py-1.5 text-xs text-zinc-300 hover:border-zinc-700 transition"
-            title="Botchain Testnet Info"
+            title="Botchain Network Info"
           >
             <span className={`h-2 w-2 rounded-full ${isConnected && isWrongNetwork ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
-            <span className="hidden md:inline font-medium">Botchain Testnet</span>
-            <span className="text-zinc-500 text-[11px] font-mono">968</span>
+            <span className="hidden md:inline font-medium">Botchain Mainnet</span>
+            <span className="text-zinc-500 text-[11px] font-mono">677</span>
           </button>
 
           {/* Network Switcher Button if connected to wrong chain */}
@@ -89,7 +89,7 @@ export function Header() {
           ) : (
             <div className="flex items-center gap-2">
               <a
-                href={`https://scan.bohr.life/address/${address}`}
+                href={`https://scan.botchain.ai/address/${address}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-zinc-800/80 px-2.5 py-1.5 text-xs font-mono text-zinc-200 hover:border-purple-500/40 transition"
@@ -116,7 +116,7 @@ export function Header() {
             <div className="flex items-center gap-4">
               <div>
                 <span className="text-zinc-500">Chain:</span>{' '}
-                <span className="font-semibold text-zinc-200">Botchain Testnet (968)</span>
+                <span className="font-semibold text-zinc-200">Botchain Mainnet (677)</span>
               </div>
               <div>
                 <span className="text-zinc-500">Currency:</span>{' '}
@@ -124,16 +124,16 @@ export function Header() {
               </div>
               <div>
                 <span className="text-zinc-500">RPC:</span>{' '}
-                <span className="font-mono text-zinc-300">https://rpc.bohr.life</span>
+                <span className="font-mono text-zinc-300">https://rpc.botchain.ai</span>
               </div>
             </div>
             <a
-              href="https://scan.bohr.life"
+              href="https://scan.botchain.ai"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-purple-400 hover:underline"
             >
-              <span>BohrScan Explorer</span>
+              <span>BotchainScan Explorer</span>
               <ExternalLink className="h-3 w-3" />
             </a>
           </div>
@@ -149,4 +149,3 @@ export function Header() {
     </header>
   );
 }
-
